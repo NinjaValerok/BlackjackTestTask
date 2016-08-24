@@ -6,16 +6,11 @@ class Game < ApplicationRecord
     player_hand.hit
   end
 
-  def stand
-    dealer_hand.play
-    # @winner = determine_winner(@player_hand.value, @dealer_hand.value)
-  end
-
   def player_hand
-    hands.find {|h| h.instance_of? Hand}
+    hands.find_by(type_name: 'Player')
   end
 
   def dealer_hand
-    hands.find {|h| h.instance_of? DealerHand}
+    hands.find_by(type_name: 'Dealer')
   end
 end

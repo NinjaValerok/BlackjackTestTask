@@ -9,4 +9,11 @@ class Hand < ApplicationRecord
   def score
     cards.sum(:value)
   end
+
+  def play_dealer
+    if score < 17
+      hit
+      play
+    end
+  end
 end

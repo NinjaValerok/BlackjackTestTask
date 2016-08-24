@@ -5,12 +5,11 @@ class Deck < ApplicationRecord
   after_create :add_and_shuffle_cards
 
   def take_card
-    card = cards.first
+    card = cards.order("created_at DESC").last
     cards.delete(card.id)
     card
   end
 
-  private
 
   def add_and_shuffle_cards
     cards << Card.all.order('random()')

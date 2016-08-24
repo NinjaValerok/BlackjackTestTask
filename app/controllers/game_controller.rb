@@ -1,12 +1,22 @@
 class GameController < ApplicationController
-  def index
-  end
+  before_action :load_game, only: [:show, :hit]
 
-  def new
+  def start
     @game = Game.create
-    @game.hands << Hand.create << Dealer_hand.create
+    @game.create_deck
+    @game.hands << Hand.create(type_name: 'Player') << Hand.create(type_name: 'Dealer')
+    redirect_to game_path(@game)
   end
 
-  def create
+  def hit
+    @game.hit
+    render 'hit', layout: false
   end
+
+  private
+
+  def load_game
+    @game = Game.find(params[:id])
+  end
+
 end

@@ -1,0 +1,1 @@
+$("#player_cards").html("<%= escape_javascript(render partial: 'cards', locals: { cards: @game.player_hand.cards} ) %>");

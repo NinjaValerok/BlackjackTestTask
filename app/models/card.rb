@@ -19,4 +19,8 @@ class Card < ApplicationRecord
       end
     end
   end
+
+  def to_s
+    "#{suit} : #{name}"
+  end
 end
