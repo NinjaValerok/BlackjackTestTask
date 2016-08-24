@@ -1,0 +1,30 @@
+.row
+  .col-md-12
+    %h1 Новая игра
+
+.row
+  #dealer_cards.col-md-12
+    %strong Карты дилера:
+.row
+  #dealer_score.col-md-12
+    %strong Счет дилера:
+
+%br
+
+.row
+  #player_cards.col-md-12
+    %strong Ваши карты:
+
+.row
+  #player_score.col-md-12
+    %strong Ваш счет:
+
+.row
+  .col-md-6
+    = form_for()
+    %button.btn-primary
+      Еще карту
+
+  .col-md-6
+    %button.btn-primary
+      Хватит
