@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824073110) do
+ActiveRecord::Schema.define(version: 20160824094118) do
 
   create_table "cards", force: :cascade do |t|
     t.string  "name"
@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20160824073110) do
     t.string  "suit"
   end
 
-  create_table "cards_games", id: false, force: :cascade do |t|
+  create_table "cards_decks", id: false, force: :cascade do |t|
     t.integer "card_id"
-    t.integer "game_id"
-    t.index ["card_id"], name: "index_cards_games_on_card_id"
-    t.index ["game_id"], name: "index_cards_games_on_game_id"
+    t.integer "deck_id"
+    t.index ["card_id"], name: "index_cards_decks_on_card_id"
+    t.index ["deck_id"], name: "index_cards_decks_on_deck_id"
   end
 
   create_table "cards_hands", id: false, force: :cascade do |t|
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20160824073110) do
     t.integer "hand_id"
     t.index ["card_id"], name: "index_cards_hands_on_card_id"
     t.index ["hand_id"], name: "index_cards_hands_on_hand_id"
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_decks_on_game_id"
   end
 
   create_table "games", force: :cascade do |t|

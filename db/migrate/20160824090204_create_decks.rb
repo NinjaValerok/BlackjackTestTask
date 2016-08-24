@@ -1,6 +1,6 @@
-class CreateHands < ActiveRecord::Migration[5.0]
+class CreateDecks < ActiveRecord::Migration[5.0]
   def change
-    create_table :hands do |t|
+    create_table :decks do |t|
       t.belongs_to :game, index: true
       t.timestamps
     end
