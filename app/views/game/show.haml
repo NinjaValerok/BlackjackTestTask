@@ -1,29 +1,36 @@
 .row
-  = @game.deck.cards.each {|c| "#{c}"}
-.row
   .col-md-12
     %h1 Новая игра
 
 .row
-  %h3 Дилер
+  .col-md-12
+    %h2#status
+
+.row
+  .col-md-12
+    %h3 Дилер
 
   #dealer_cards
     = render partial: 'cards', locals: { cards: @game.dealer_hand.cards }
   .row
-    #dealer_score.col-md-12
-      %strong Счет :
-
+    .col-md-12
+      %strong
+        Счет дилера:
+        %em#dealer_score= "#{@game.dealer_hand.score}"
 %br
 
 .row
-  %h3 Игрок
+  .col-md-12
+    %h3 Игрок
 
   #player_cards
     = render partial: 'cards', locals: { cards: @game.player_hand.cards}
 
   .row
-    #player_score.col-md-12
-      %strong Ваш счет:
+    .col-md-12
+      %strong
+        Счет игрока:
+        %em#player_score= "#{@game.player_hand.score}"
 
   %br
 
@@ -34,5 +41,6 @@
           Еще карту
 
     .col-md-6
-      %button.btn-primary
-        Хватит
+      = form_tag(stop_game_path(@game), method: :post, remote: true) do
+        %button.btn-primary
+          Хватит
