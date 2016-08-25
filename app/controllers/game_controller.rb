@@ -14,6 +14,7 @@ class GameController < ApplicationController
     if @game.player_hand.score < 20 && !@game.stand?
       @game.hit
       if @game.player_hand.score > 21
+        @status = 'Победил Дилер'
         render 'stop', layout: false
       elsif @game.player_hand.score == 21
         @status = 'У вас блэк джек'
