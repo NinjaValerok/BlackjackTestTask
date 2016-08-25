@@ -1,6 +1,11 @@
 class GameController < ApplicationController
   before_action :load_game, only: [:show, :hit, :stop]
 
+
+  def index
+    @games = Game.all
+  end
+
   def start
     @game = Game.create
     @game.create_deck
@@ -11,9 +16,11 @@ class GameController < ApplicationController
   end
 
   def hit
+    puts @game.stand?
     if @game.player_hand.score < 20 && !@game.stand?
       @game.hit
       if @game.player_hand.score > 21
+        @game.update_column(:status, 'Победил Дилер')
         @status = 'Победил Дилер'
         render 'stop', layout: false
       elsif @game.player_hand.score == 21
@@ -31,7 +38,6 @@ class GameController < ApplicationController
     @game.update_column(:stand, true)
     @game.dealer_hand.play_dealer
     status = @game.find_winner
-
     case status
     when 'Player'
       @status = 'Победил игрок'
@@ -40,9 +46,11 @@ class GameController < ApplicationController
     else
       @game.push
       @status = 'Пуш'
+        @game.update_column(:stand, false)
     end
     puts @status
      render 'stop', layout: false
+    @game.update_column(:status, @status)
   end
 
   private

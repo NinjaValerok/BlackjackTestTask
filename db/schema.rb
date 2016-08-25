@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825190912) do
+ActiveRecord::Schema.define(version: 20160825195732) do
 
   create_table "cards", force: :cascade do |t|
     t.string  "name"
@@ -42,9 +42,10 @@ ActiveRecord::Schema.define(version: 20160825190912) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.boolean  "stand"
+    t.string   "status",     default: "неизвестно, еще не закончилась"
   end
 
   create_table "hands", force: :cascade do |t|

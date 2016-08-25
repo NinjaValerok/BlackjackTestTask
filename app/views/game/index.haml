@@ -1,1 +1,6 @@
-= link_to 'Начать новую игру', start_game_index_path, :method => :post
+%br
+.row
+  .col-md-12
+    - @games.find_each do |game|
+      %strong= "Победил :#{game.status}"
+      %br
