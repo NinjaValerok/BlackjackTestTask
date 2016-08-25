@@ -13,7 +13,7 @@ class Hand < ApplicationRecord
   def play_dealer
     if score < 17
       hit
-      play
+      play_dealer
     end
   end
 end

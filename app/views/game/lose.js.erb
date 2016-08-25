@@ -1,4 +1,0 @@
-$("#player_cards").html("<%= escape_javascript(render partial: 'cards', locals: { cards: @game.player_hand.cards} ) %>");
-$("#player_score").html("<%= escape_javascript("#{@game.player_hand.score}") %>");
-$("#status").html("Вы проиграли");
-alert('Вы проиграли');

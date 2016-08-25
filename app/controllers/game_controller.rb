@@ -11,29 +11,37 @@ class GameController < ApplicationController
   end
 
   def hit
-    @game.hit
-    if @game.player_hand.score > 21
-      render 'lose', layout: false
-    elsif @game.player_hand.score == 21
-      render 'blackjack', layout: false
+    if @game.player_hand.score < 20 && !@game.stand?
+      @game.hit
+      if @game.player_hand.score > 21
+        render 'stop', layout: false
+      elsif @game.player_hand.score == 21
+        @status = 'У вас блэк джек'
+        render 'stop', layout: false
+      else
+        render 'hit', layout: false
+      end
     else
-      render 'hit', layout: false
+      render js: "alert('Вам хватит ;)')"
     end
   end
 
   def stop
+    @game.update_column(:stand, true)
     @game.dealer_hand.play_dealer
     status = @game.find_winner
 
     case status
     when 'Player'
-      render 'win', layout: false
+      @status = 'Победил игрок'
     when 'Dealer'
-      render 'lose', layout: false
+      @status = 'Победил Дилер'
     else
       @game.push
-      render 'push', layout: false
+      @status = 'Пуш'
     end
+    puts @status
+     render 'stop', layout: false
   end
 
   private
