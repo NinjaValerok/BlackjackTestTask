@@ -2,5 +2,8 @@
 .row
   .col-md-12
     - @games.find_each do |game|
-      %strong= "Победил :#{game.status}"
-      %br
+      .row
+        .col-md-3
+          %strong= "Игра id №: #{game.id}"
+        .col-md-9
+          %strong= "Победил :#{game.status}"
