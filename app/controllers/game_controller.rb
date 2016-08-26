@@ -6,7 +6,8 @@ class GameController < ApplicationController
     @games = Game.all
   end
 
-  def start
+  # need move to service
+  def create
     @game = Game.create
     @game.create_deck
     dealer = Hand.create(type_name: 'Dealer')
@@ -15,6 +16,7 @@ class GameController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  # little shit, but ok for the start
   def hit
     puts @game.stand?
     if @game.player_hand.score < 20 && !@game.stand?
