@@ -20,17 +20,11 @@ RSpec.describe GameController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
+  describe "POST #create" do
+    subject { post :create }
 
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+    it "redirects to game_url(@game)" do
+      expect(subject).to redirect_to(game_url(assigns(:game)))
     end
   end
 

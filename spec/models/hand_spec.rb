@@ -8,7 +8,13 @@ RSpec.describe Hand, type: :model do
   it { should respond_to(:hit) }
 
   describe '#hit' do
-    let(:hand) { Hand.create }
+    #need move to factory
+    let(:hand) do
+      game = Game.create
+      game.create_deck
+      game.hands << Hand.create(type_name: 'Player')
+      game.player_hand
+    end
     subject { hand.hit }
 
     it 'should increase cards number' do
