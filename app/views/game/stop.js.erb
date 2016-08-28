@@ -1,8 +1,6 @@
-$("#player_cards").html("<%= escape_javascript(render partial: 'cards', locals: { cards: @game.player_hand.cards} ) %>");
-$("#player_score").html("<%= escape_javascript("#{@game.player_hand.score}") %>");
+$("#players").html("<%= escape_javascript(render partial: 'players', locals: { game: @game } ) %>");
 
-$("#dealer_cards").html("<%= escape_javascript(render partial: 'cards', locals: { cards: @game.dealer_hand.cards} ) %>");
-$("#dealer_score").html("<%= escape_javascript("#{@game.dealer_hand.score}") %>");
+$("#dealer").html("<%= escape_javascript(render partial: 'dealer' ) %>");
 
 $("#status").html("<%= @status %>");
 alert("<%= @status %>");

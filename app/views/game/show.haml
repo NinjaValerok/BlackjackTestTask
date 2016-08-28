@@ -7,31 +7,15 @@
     %h2#status
       Идет
 
-.row
-  .col-md-12
-    %h3 Дилер
 
-  #dealer_cards
-    = render partial: 'cards', locals: { cards: @game.dealer_hand.cards }
-  .row
-    .col-md-12
-      %strong
-        Счет дилера:
-        %em#dealer_score= "#{@game.dealer_hand.score}"
+  #dealer
+    = render partial: 'dealer'
+
 %br
 
-.row
-  .col-md-12
-    %h3 Игрок
+  #players
+    = render partial: 'players', locals: { game: @game }
 
-  #player_cards
-    = render partial: 'cards', locals: { cards: @game.player_hand.cards}
-
-  .row
-    .col-md-12
-      %strong
-        Счет игрока:
-        %em#player_score= "#{@game.player_hand.score}"
 
   %br
 

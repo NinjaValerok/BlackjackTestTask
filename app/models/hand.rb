@@ -7,6 +7,10 @@ class Hand < ApplicationRecord
     cards << game.deck.take_card
   end
 
+  def stand
+    update_column(:stand_status, true)
+  end
+
   def score
     cards.sum(:value)
   end

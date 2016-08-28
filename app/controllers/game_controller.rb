@@ -6,26 +6,27 @@ class GameController < ApplicationController
     @games = Game.all
   end
 
-  # need move to service
+  def show
+    if user_signed_in?
+      @game.add_user current_user
+    end
+
+  end
+
   def create
     @game = Game.create
-    @game.create_deck
-    dealer = Hand.create(type_name: 'Dealer')
-    @game.hands << Hand.create(type_name: 'Player') << dealer
-    2.times { dealer.hit }
     redirect_to game_path(@game)
   end
 
   # little shit, but ok for the start
   def hit
-    puts @game.stand?
-    if @game.player_hand.score < 20 && !@game.stand?
-      @game.hit
-      if @game.player_hand.score > 21
+    if @game.player_hand(current_user).score < 20
+      @game.hit_user(current_user)
+      if @game.player_hand(current_user).score > 21
         @game.update_column(:status, 'Победил Дилер')
         @status = 'Победил Дилер'
         render 'stop', layout: false
-      elsif @game.player_hand.score == 21
+      elsif @game.player_hand(current_user).score == 21
         @status = 'У вас блэк джек'
         render 'stop', layout: false
       else
@@ -37,9 +38,9 @@ class GameController < ApplicationController
   end
 
   def stop
-    @game.update_column(:stand, true)
-    @game.dealer_hand.play_dealer
-    status = @game.find_winner
+    @game.play_dealer
+    hand = @game.find_winner
+    status = hand.try(:type_name)
     case status
     when 'Player'
       @status = 'Победил игрок'
@@ -48,11 +49,9 @@ class GameController < ApplicationController
     else
       @game.push
       @status = 'Пуш'
-        @game.update_column(:stand, false)
     end
     puts @status
      render 'stop', layout: false
-    @game.update_column(:status, @status)
   end
 
   private
