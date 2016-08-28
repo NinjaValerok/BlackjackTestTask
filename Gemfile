@@ -53,6 +53,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap-sass'
 gem 'haml'
+gem 'devise'
+gem 'devise-bootstrap-views'
 
 group :production do
   gem 'pg'

@@ -41,10 +41,8 @@
   .row
     .col-md-6
       = form_tag(hit_game_path(@game), method: :post, remote: true) do
-        %button.btn-primary
-          Еще карту
+        %input.btn.btn-primary{:value => "Еще карту", :type => "submit"}
 
     .col-md-6
       = form_tag(stop_game_path(@game), method: :post, remote: true) do
-        %button.btn-primary
-          Хватит
+        %input.btn.btn-warning{:value => "Хватит", :type => "submit"}
