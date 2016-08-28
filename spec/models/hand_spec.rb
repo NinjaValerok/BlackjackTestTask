@@ -6,6 +6,7 @@ RSpec.describe Hand, type: :model do
   it { should respond_to(:cards) }
   it { should respond_to(:game) }
   it { should respond_to(:hit) }
+  it { should respond_to(:user) }
 
   describe '#hit' do
     #need move to factory
