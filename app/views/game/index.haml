@@ -5,5 +5,8 @@
       .row
         .col-md-3
           %strong= "Игра id №: #{game.id}"
-        .col-md-9
-          %strong= "Победил :#{game.status}"
+        .col-md-6
+          %strong= "#{game.status}"
+        .col-md-3
+          - if game.status == 'неизвестно, еще не закончилась'
+            =link_to 'Присоединиться', game_path(game)

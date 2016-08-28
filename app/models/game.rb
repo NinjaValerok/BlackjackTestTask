@@ -5,7 +5,6 @@ class Game < ApplicationRecord
   after_create :create_deck
   after_create :create_dealer
 
-  # scope :players, -> { where(type_name: 'Player') }
 
   def add_user(user)
     unless hands.exists?(user_id: user.id)
@@ -32,7 +31,7 @@ class Game < ApplicationRecord
 
   def play_dealer
     create_new_deck_if_need
-    dealer_hand.play_dealer unless players_with_score_less_21.empty?
+    dealer_hand.play_dealer unless players_with_score_less_22.empty?
   end
 
   def player_hand(user)
@@ -48,15 +47,15 @@ class Game < ApplicationRecord
     dealer_hand.hit
   end
 
-  def players_with_score_less_21
-    players.to_a.map { |player| player if player.score < 21 }
+  def players_with_score_less_22
+    players.to_a.map { |player| player if player.score < 22 }
   end
 
 
   def find_winner
-    players = players_with_score_less_21
+    players = players_with_score_less_22
     return dealer_hand if players.empty?
-    max_player_hand = players.max{ |p1, p2| p1.score > p2.score }
+    max_player_hand = players.max{ |p1, p2| p1.score >= p2.score }
     return max_player_hand if dealer_hand.score > 21
     return max_player_hand if max_player_hand.score > dealer_hand.score
   end
