@@ -52,6 +52,7 @@ class GameController < ApplicationController
     end
     puts @status
      render 'stop', layout: false
+    @game.update_column(:status, @status)
   end
 
   private

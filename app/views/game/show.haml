@@ -10,8 +10,10 @@
 
   #dealer
     = render partial: 'dealer'
-
 %br
+.row
+  .col-md-12
+    %strong Игроки:
 
   #players
     = render partial: 'players', locals: { game: @game }
