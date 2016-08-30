@@ -80,7 +80,7 @@ class Game < ApplicationRecord
   # return nil if need push
   def find_winner
     _players_hands = players_hands_with_score_less_22
-    if _players_hands.empty?
+    if _players_hands.empty? || _players_hands.all?(&:blank?)
       update_column(:status, STATUS[1])
       return dealer_hand
     else

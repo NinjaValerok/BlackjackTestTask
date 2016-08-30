@@ -8,9 +8,8 @@
 
 
   .row
-    .col-md-12
-      #dealer
-        = render partial: 'dealer'
+    #dealer.col-md-12
+      = render partial: 'dealer'
   %br
   .row
     .col-md-12
@@ -25,7 +24,7 @@
   %br
 
   - if user_signed_in?
-    .row
+    #buttons.row
       .col-md-6
         = form_tag(hit_game_path(@game), method: :post, remote: true) do
           %input.btn.btn-primary{:value => "Еще карту", :type => "submit"}
