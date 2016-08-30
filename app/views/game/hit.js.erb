@@ -1,1 +1,3 @@
-$("#players").html("<%= escape_javascript(render partial: 'players', locals: { game: @game } ) %>");
+hand_id = '<%= "#hand_#{@hand.id}" %>';
+$(hand_id).html("<%= escape_javascript(render partial: 'hand', locals: { hand: @hand } ) %>");
+alert("<%= @message %>");

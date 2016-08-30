@@ -4,28 +4,32 @@
 
 .row
   .col-md-12
-    %h2#status
-      Идет
+    %h2#status= @game.status
 
 
-  #dealer
-    = render partial: 'dealer'
-%br
-.row
-  .col-md-12
-    %strong Игроки:
+  .row
+    .col-md-12
+      #dealer
+        = render partial: 'dealer'
+  %br
+  .row
+    .col-md-12
+      %strong Игроки:
+
+  %br
 
   #players
-    = render partial: 'players', locals: { game: @game }
+    = render partial: 'hands', locals: { game: @game }
 
 
   %br
 
-  .row
-    .col-md-6
-      = form_tag(hit_game_path(@game), method: :post, remote: true) do
-        %input.btn.btn-primary{:value => "Еще карту", :type => "submit"}
+  - if user_signed_in?
+    .row
+      .col-md-6
+        = form_tag(hit_game_path(@game), method: :post, remote: true) do
+          %input.btn.btn-primary{:value => "Еще карту", :type => "submit"}
 
-    .col-md-6
-      = form_tag(stop_game_path(@game), method: :post, remote: true) do
-        %input.btn.btn-warning{:value => "Хватит", :type => "submit"}
+      .col-md-6
+        = form_tag(stop_game_path(@game), method: :post, remote: true) do
+          %input.btn.btn-warning{:value => "Хватит", :type => "submit"}

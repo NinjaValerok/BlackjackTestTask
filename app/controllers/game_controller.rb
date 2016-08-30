@@ -1,6 +1,8 @@
 class GameController < ApplicationController
   before_action :load_game, only: [:show, :hit, :stop]
 
+  layout false, only: [:hit, :stop]
+
 
   def index
     @games = Game.all
@@ -10,7 +12,6 @@ class GameController < ApplicationController
     if user_signed_in?
       @game.add_user current_user
     end
-
   end
 
   def create
@@ -18,41 +19,15 @@ class GameController < ApplicationController
     redirect_to game_path(@game)
   end
 
-  # little shit, but ok for the start
   def hit
-    if @game.player_hand(current_user).score < 20
-      @game.hit_user(current_user)
-      if @game.player_hand(current_user).score > 21
-        @game.update_column(:status, 'Победил Дилер')
-        @status = 'Победил Дилер'
-        render 'stop', layout: false
-      elsif @game.player_hand(current_user).score == 21
-        @status = 'У вас блэк джек'
-        render 'stop', layout: false
-      else
-        render 'hit', layout: false
-      end
-    else
-      render js: "alert('Вам хватит ;)')"
-    end
+    @hand = @game.player_hand(current_user)
+    @message = @game.hit_user(current_user)
   end
 
   def stop
-    @game.play_dealer
-    hand = @game.find_winner
-    status = hand.try(:type_name)
-    case status
-    when 'Player'
-      @status = 'Победил игрок'
-    when 'Dealer'
-      @status = 'Победил Дилер'
-    else
-      @game.push
-      @status = 'Пуш'
-    end
-    puts @status
-     render 'stop', layout: false
-    @game.update_column(:status, @status)
+    @game.player_hand(current_user).update_column(:status, Hand::STATUS[1])
+    @game.stop
+    @status = @game.status
   end
 
   private

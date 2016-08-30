@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    - @game.players_hands.each do |hand|
+      %div{ id: "hand_#{hand.id}", class: :row }
+        .col-md-12
+          = render partial: 'hand', locals: {hand: hand}
+      %br

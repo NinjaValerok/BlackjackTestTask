@@ -20,12 +20,6 @@ RSpec.describe Game, type: :model do
       expect(subject.dealer_hand.cards.size).to eq 2
     end
 
-    # not work, why?!
-    # add_column :games, :round, :integer, default: 0
-    # it 'should have round eq 0' do
-    #   expect(subject.round).to eq 0
-    # end
-
   end
 
   # describe '#hit' do
@@ -42,25 +36,25 @@ RSpec.describe Game, type: :model do
   #   end
   # end
   #
-  describe '#find winner' do
-    let(:game) { create(:game) }
-
-    context 'have 2 players' do
-      let(:user1) { create(:user) }
-      let(:user2) { create(:user) }
-      before do
-        game.hands << create(:hand, user: user1) << create(:hand, user: user2)
-        game.players.each do |p|
-          p.hit
-          p.stand
-        end
-        game.play_dealer
-      end
-
-      it 'find the best score hand' do
-
-      end
-    end
-  end
+  # describe '#find winner' do
+  #   let(:game) { create(:game) }
+  #
+  #   context 'have 2 players' do
+  #     let(:user1) { create(:user) }
+  #     let(:user2) { create(:user) }
+  #     before do
+  #       game.hands << create(:hand, user: user1) << create(:hand, user: user2)
+  #       game.players.each do |p|
+  #         p.hit
+  #         p.stand
+  #       end
+  #       game.play_dealer
+  #     end
+  #
+  #     it 'find the best score hand' do
+  #
+  #     end
+  #   end
+  # end
 
 end

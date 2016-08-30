@@ -8,12 +8,12 @@ RSpec.describe Hand, type: :model do
   it { should respond_to(:hit) }
   it { should respond_to(:user) }
   it { should respond_to(:stand) }
-  it { should respond_to(:stand_status) }
+  it { should respond_to(:status) }
 
   context 'after create' do
-    it 'have stand_status - false' do
-      expect(subject.stand_status).to be_falsey
-    end
+    # it "have status - #{Hand::STATUS[0]}" do
+    #   expect(subject.status).to eq Hand::STATUS[0]
+    # end
 
     it 'have user' do
       expect(subject.user).to be_truthy
@@ -24,8 +24,8 @@ RSpec.describe Hand, type: :model do
     let(:hand) {create(:hand)}
     subject { hand.stand }
 
-    it 'should change stand_status to false' do
-      expect{ subject }.to change(hand, :stand_status).to true
+    it 'should change status to stand' do
+      expect{ subject }.to change(hand, :status).to Hand::STATUS[1]
     end
   end
 

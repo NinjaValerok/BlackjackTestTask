@@ -1,14 +1,12 @@
+%strong Дилер:
 .row
   .col-md-12
-    %strong Дилер
-    .row
-      .col-md-12
-        %strong
-          Счет дилера:
-          %em= "#{@game.dealer_hand.score}"
-    .row
-      .col-md-2
-        Карты:
-      .col-md-9.col-md-offset-1
-        - @game.dealer_hand.cards.each do |card|
-          %strong= "#{card}"
+    %strong
+      Счет дилера:
+      %em= "#{@game.dealer_hand.score}"
+.row
+  .col-md-2
+    Карты:
+  .col-md-9.col-md-offset-1
+    - @game.dealer_hand.cards.each do |card|
+      %strong= "#{card}"

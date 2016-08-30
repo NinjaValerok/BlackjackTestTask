@@ -8,5 +8,6 @@
         .col-md-6
           %strong= "#{game.status}"
         .col-md-3
-          - if game.status == 'неизвестно, еще не закончилась'
-            =link_to 'Присоединиться', game_path(game)
+          - if game.status == Game::STATUS[0]
+            - link_name = user_signed_in? ? 'Присоединиться' : 'Посмотреть'
+            = link_to link_name, game_path(game)
