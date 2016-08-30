@@ -13,7 +13,7 @@
           = link_to 'На главную', root_path, :class => 'navbar-brand'
         #navbar.navbar-collapse.collapse
           %ul.nav.navbar-nav
-            -#%li= link_to('', '#')
+            %li= link_to 'Начать новую игру', game_index_path, :method => :post if user_signed_in?
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li= link_to('Мой аккаунт', edit_user_registration_path)
@@ -28,9 +28,6 @@
           %p.notice= notice
           %p.alert= alert
 
-      .row
-        .col-md-8.col-md-offset-2
-          = link_to 'Начать новую игру', game_index_path, :method => :post
       %br
       .row
         .col-md-8.col-md-offset-2
